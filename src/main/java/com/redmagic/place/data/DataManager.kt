@@ -31,12 +31,12 @@ class DataManager {
                     val time = config.getString("${player.uniqueId}.time")
 
                     if (time == null) {
-                        cacheMap[player.uniqueId] = TimedUser(player.uniqueId, null)
+                        cacheMap[player.uniqueId] = TimedUser(player.uniqueId, null, 0)
                         return@event
                     }
 
                     val startTime: LocalDateTime = LocalDateTime.parse(time)
-                    val timeU = TimedUser(player.uniqueId, startTime)
+                    val timeU = TimedUser(player.uniqueId, startTime, config.getInt("amount"))
                     cacheMap[player.uniqueId] = timeU
                     if (timeU.secondsLeft() != 0) {
                         PlaceMC.placeMC.actionBarLoop.actionPlayers.add(player.uniqueId)
@@ -46,7 +46,7 @@ class DataManager {
 
 
                 } else {
-                    val timedUser = TimedUser(player.uniqueId, null)
+                    val timedUser = TimedUser(player.uniqueId, null, 0)
                     cacheMap[player.uniqueId] = timedUser
 
                     config.set("${player.uniqueId}.time", null)
@@ -59,6 +59,7 @@ class DataManager {
 
             async {
                 PlaceMC.placeMC.dataConfig.set("${player.uniqueId}.time", cacheMap[player.uniqueId]!!.startTime?.toString())
+                PlaceMC.placeMC.dataConfig.set("${player.uniqueId}.amount", cacheMap[player.uniqueId]!!.amount)
                 cacheMap.remove(player.uniqueId)
             }
 

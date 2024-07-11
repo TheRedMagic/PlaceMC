@@ -7,7 +7,8 @@ import java.util.UUID
 
 class TimedUser(
     val uuid: UUID,
-    var startTime: LocalDateTime?
+    var startTime: LocalDateTime?,
+    var amount: Int
 ) {
 
     fun secondsLeft(): Int {

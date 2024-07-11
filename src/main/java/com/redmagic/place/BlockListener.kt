@@ -4,8 +4,7 @@ import com.redmagic.place.data.getTimedUser
 import com.undefined.api.event.event
 import com.undefined.api.extension.string.translateColor
 import org.bukkit.GameMode
-import org.bukkit.event.block.BlockBreakEvent
-import org.bukkit.event.block.BlockPlaceEvent
+import org.bukkit.event.block.*
 import org.bukkit.event.entity.EntityPickupItemEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerDropItemEvent
@@ -28,6 +27,7 @@ class BlockListener {
                     ).type = block.type
 
                     it.startTime = LocalDateTime.now()
+                    it.amount++
 
                     PlaceMC.placeMC.actionBarLoop.actionPlayers.remove(this.player.uniqueId)
                     PlaceMC.placeMC.actionBarLoop.actionPlayers.add(this.player.uniqueId)
@@ -55,12 +55,11 @@ class BlockListener {
         event<PlayerJoinEvent> {
             player.gameMode = GameMode.CREATIVE
         }
-
         event<PlayerDropItemEvent> { isCancelled = true }
         event<EntityPickupItemEvent> { isCancelled = true }
 
-
-
+        event<BlockPistonExtendEvent> { isCancelled = true }
+        event<BlockDispenseEvent> { isCancelled = true }
     }
 
 }
