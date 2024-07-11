@@ -1,14 +1,16 @@
+import com.undefinedcreation.runServer.ServerType
+
 plugins {
     java
     kotlin("jvm") version "1.9.22"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("xyz.jpenilla.run-paper") version "2.2.2"
+    id("com.undefinedcreation.runServer") version "0.0.1"
 }
 
 group = "com.redmagic"
 version = "1.0"
 
-val mcVersion = "1.20.4"
+val minecraftVersion = "1.21"
 
 repositories {
     mavenCentral()
@@ -27,22 +29,26 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("com.undefined:api:0.5.42:mappped")
+    implementation("com.undefined:api:0.5.56:mapped")
 }
 
 tasks {
     shadowJar {
-        archiveFileName.set("${this.name}-shadow.jar")
+        archiveFileName.set("${this.project.name}-shadow.jar")
     }
 
     compileKotlin {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = "21"
     }
     runServer {
-        minecraftVersion(mcVersion)
+        mcVersion(minecraftVersion)
+
+        serverType(ServerType.PAPERMC)
+
+        acceptMojangEula(true)
     }
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }

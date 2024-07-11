@@ -1,4 +1,4 @@
-name: Template
+name: PlaceMC
 version: '${version}'
-main: com.redmagic.template.Template
-api-version: '1.20'
+main: com.redmagic.place.PlaceMC
+api-version: '1.21'
