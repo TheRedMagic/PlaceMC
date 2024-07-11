@@ -60,6 +60,20 @@ class BlockListener {
 
         event<BlockPistonExtendEvent> { isCancelled = true }
         event<BlockDispenseEvent> { isCancelled = true }
+
+        event<PlayerJoinEvent> {
+
+
+            val un = "<gray>ᴄʀᴇᴀᴛᴇᴅ ʙʏ : <#3495eb>ᴜɴᴅᴇꜰɪɴᴇᴅ ᴄʀᴇᴀᴛɪᴏɴ".translateColor()
+            val fl = "<gray>ѕᴘᴏɴѕᴏʀᴇᴅ ʙʏ : <#DC7BDA>ꜰʟʏᴛᴇ".translateColor()
+            val space = "                                                              "
+
+            player.setPlayerListHeaderFooter(
+                "<gold>ʟᴇᴀʀɴ ѕᴘɪɢᴏᴛ <red>ᴘʟᴀᴄᴇ\n".translateColor(),
+                "$space\n$un\n$fl"
+            )
+
+        }
     }
 
 }

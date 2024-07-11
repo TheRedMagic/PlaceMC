@@ -104,6 +104,14 @@ class PlaceMC : JavaPlugin() {
                 startTime = LocalDateTime.now()
                 return@addExecutePlayer false
             }
+
+        UndefinedCommand("spawn", aliases = listOf("back", "s"))
+            .addExecutePlayer {
+                val player = player!!
+                player.sendMessage("<green>ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ ʙᴀᴄᴋ ᴛᴏ ѕᴘᴀᴡɴ".translateColor())
+                player.teleport(Bukkit.getWorld("placemc")!!.spawnLocation)
+                return@addExecutePlayer false
+            }
     }
 
     private fun saveDataFile() {
